@@ -47,12 +47,38 @@ button {
   color: white;
   position: absolute;
 }
+  #animation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#animation-container img {
+  margin-top: 20px;
+  border-radius: 15px; /* optional, smooth edges */
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>Will you be my Valentine, my King? 👑💖</h1>
+<div id="animation-container">
+  <svg width="500" height="200">
+    <defs>
+      <path id="arc" d="M50,150 A200,200 0 0,1 450,150" />
+    </defs>
+    <text font-size="28" fill="white" font-weight="bold">
+      <textPath href="#arc" startOffset="50%" text-anchor="middle">
+        Will you be my Valentine? 💖
+      </textPath>
+    </text>
+  </svg>
+
+  <img src="image1.gif" alt="Teddy Valentine" width="300">
+</div>
 
 <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
 <button id="noBtn" onmouseover="moveNo()">No 💔</button>
