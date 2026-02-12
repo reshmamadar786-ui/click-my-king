@@ -39,11 +39,12 @@
 
 <body>
 
-  <script>
+<script>
 let password = prompt("Enter the secret number 👑");
 
-if(password !== "0220") {
-  document.body.innerHTML = "<h1>Wrong password 💔</h1>";
+if(password !== "0214") {
+  document.write("<h1 style='text-align:center;margin-top:100px;'>Wrong password 💔</h1>");
+  throw new Error("Wrong password");
 }
 </script>
 
