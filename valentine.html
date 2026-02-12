@@ -21,12 +21,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      width: 100%;
     }
 
+    /* SVG is responsive */
     svg {
       width: 90%;
-      max-width: 500px;
-      height: 150px;
+      max-width: 600px;
+      height: 200px;
     }
 
     #valentine-gif {
@@ -52,10 +55,10 @@
 
 <div id="animation-container">
   <!-- Sad-shaped arc using SVG -->
-  <svg viewBox="0 0 500 150">
+  <svg viewBox="0 0 600 200">
     <defs>
-      <!-- Concave-down arc -->
-      <path id="arc" d="M50,50 A200,100 0 0,0 450,50" />
+      <!-- Concave-down arc (sad shape) -->
+      <path id="arc" d="M50,150 A250,100 0 0,0 550,150" />
     </defs>
     <text font-size="28" fill="white" font-weight="bold">
       <textPath href="#arc" startOffset="50%" text-anchor="middle">
@@ -73,17 +76,19 @@
 <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
 <script>
-function yesClicked() {
-  document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
-}
+  // Yes button click
+  function yesClicked() {
+    document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+  }
 
-function moveNo() {
-  let x = Math.random() * (window.innerWidth - 100);
-  let y = Math.random() * (window.innerHeight - 50);
-  const btn = document.getElementById("noBtn");
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
-}
+  // No button runs away
+  function moveNo() {
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
+    const btn = document.getElementById("noBtn");
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+  }
 </script>
 
 </body>
