@@ -36,6 +36,7 @@
     #valentine-gif {
       width: 300px;
       border-radius: 15px;
+      margin-top: 20px;
     }
 
     button {
@@ -62,17 +63,23 @@
 
 <body>
 
+  <!-- Curved text -->
   <div id="arc-text">Will you be my Valentine? 💖</div>
+
+  <!-- GIF -->
   <img id="valentine-gif" src="image1.gif" alt="Teddy Valentine">
 
+  <!-- Buttons -->
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
   <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
   <script>
+    // Yes button
     function yesClicked(){
       document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
     }
 
+    // No button runs away
     function moveNo(){
       let x = Math.random() * (window.innerWidth - 100);
       let y = Math.random() * (window.innerHeight - 50);
@@ -82,27 +89,27 @@
       btn.style.top = y + "px";
     }
 
-    // Create curved text dynamically
+    // Sad-shaped curved text (concave down)
     const arcText = document.getElementById("arc-text");
-const str = arcText.innerText;
-arcText.innerText = "";
+    const str = arcText.innerText;
+    arcText.innerText = "";
 
-const radius = 60; // height of the curve
-const step = 8;    // letter spacing
+    const radius = 60; // height of the curve
+    const step = 8;    // spacing between letters
 
-for (let i = 0; i < str.length; i++) {
-  const span = document.createElement("span");
-  span.innerText = str[i];
-  const angle = (i - str.length / 2) * step;
-  const rad = angle * (Math.PI / 180);
+    for (let i = 0; i < str.length; i++) {
+      const span = document.createElement("span");
+      span.innerText = str[i];
 
-  const x = radius * Math.sin(rad);
-  const y = radius * (1 - Math.cos(rad)); // downward curve
-  span.style.transform = `translate(${x}px, ${y}px)`; 
+      const angle = (i - str.length / 2) * step;
+      const rad = angle * (Math.PI / 180);
 
-  arcText.appendChild(span);
-}
+      const x = radius * Math.sin(rad);
+      const y = -radius * (1 - Math.cos(rad)); // negative = sad arc ∩
+      span.style.transform = `translate(${x}px, ${y}px)`;
 
+      arcText.appendChild(span);
+    }
   </script>
 
 </body>
