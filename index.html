@@ -1,80 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My King ❤️</title>
+<title>My King ❤️</title>
 
-  <style>
-    body {
-      text-align: center;
-      font-family: Arial;
-      background: #ffdde1;
-      overflow: hidden;
-    }
+<script>
+let password = prompt("Enter the secret number 👑");
 
-    #content {
-      display: none;
-    }
+// CHANGE PASSWORD HERE
+if(password !== "0220"){
+  document.write("<h1 style='text-align:center;margin-top:100px;'>Wrong password 💔</h1>");
+  document.stop();
+}
+</script>
 
-    button {
-      padding: 15px 25px;
-      font-size: 18px;
-      margin: 10px;
-      cursor: pointer;
-      border-radius: 12px;
-      border: none;
-    }
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: #ffdde1;
+  overflow: hidden;
+}
 
-    #yesBtn {
-      background-color: #ff4d6d;
-      color: white;
-    }
+button {
+  padding: 15px 25px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: none;
+}
 
-    #noBtn {
-      background-color: gray;
-      color: white;
-      position: absolute;
-    }
-  </style>
+#yesBtn {
+  background-color: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background-color: gray;
+  color: white;
+  position: absolute;
+}
+</style>
 </head>
 
 <body>
-
-<div id="content">
 
 <h1>Will you be my Valentine, my King? 👑💖</h1>
 
 <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
 <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
-</div>
-
 <script>
-// PASSWORD LOCK
-let password = prompt("Enter the secret number 👑");
-
-if(password === "0220"){ // change password here
-  document.getElementById("content").style.display = "block";
-} else {
-  document.body.innerHTML = "<h1 style='margin-top:100px;'>Wrong password 💔</h1>";
-}
-
-// YES BUTTON
-function yesClicked() {
+function yesClicked(){
   document.body.innerHTML =
-    "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+  "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
 }
 
-// NO BUTTON RUNS AWAY
-function moveNo() {
-  let x = Math.random() * (window.innerWidth - 100);
-  let y = Math.random() * (window.innerHeight - 50);
+function moveNo(){
+  let x = Math.random()*(window.innerWidth-100);
+  let y = Math.random()*(window.innerHeight-50);
 
   let btn = document.getElementById("noBtn");
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
+  btn.style.left = x+"px";
+  btn.style.top = y+"px";
 
-  let texts = ["No 😅","Are you sure? 🥺","Think again 😜","Don't click me 😏"];
-  btn.innerText = texts[Math.floor(Math.random()*texts.length)];
+  let texts=["No 😅","Are you sure? 🥺","Think again 😜","Don't click me 😏"];
+  btn.innerText=texts[Math.floor(Math.random()*texts.length)];
 }
 </script>
 
