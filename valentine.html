@@ -110,14 +110,19 @@ function moveNo(){
 const text = document.getElementById("arc-text");
 const str = text.innerText;
 text.innerText = "";
-const radius = 15; // higher = flatter curve
+
+// Adjust rotation per letter
+const totalAngle = 90; // total arc in degrees
+const step = totalAngle / str.length; // rotate each letter evenly
 
 for (let i = 0; i < str.length; i++) {
   let span = document.createElement("span");
   span.innerText = str[i];
   span.style.display = "inline-block";
   span.style.transformOrigin = "bottom center";
-  span.style.transform = `rotate(${(i - str.length/2) * radius}deg)`;
+  
+  // rotate each letter around the center
+  span.style.transform = `rotate(${(i - str.length/2) * step}deg)`;
   text.appendChild(span);
 }
 </script>
