@@ -34,19 +34,10 @@
       margin-top: 50px;
     }
 
-    #arc-text {
-      font-size: 32px;
-      font-weight: bold;
-      color: white;
-      text-align: center;
-      line-height: 1em;
-      display: flex;
-      justify-content: center;
-    }
-
-    #arc-text span {
-      display: inline-block;
-      transform-origin: bottom center;
+    #animation-container svg {
+      width: 90%;
+      max-width: 500px;
+      height: 220px;
     }
 
     #valentine-gif {
@@ -80,45 +71,41 @@
 <body>
 
 <div id="animation-container">
-  <div id="arc-text">Will you be my Valentine? 💖</div>
+  <!-- SVG curved text -->
+  <svg viewBox="0 0 500 220">
+    <defs>
+      <path id="text-arc" d="M50,180 A200,200 0 0,1 450,180" />
+    </defs>
+    <text font-size="28" fill="white" font-weight="bold">
+      <textPath href="#text-arc" startOffset="50%" text-anchor="middle">
+        Will you be my Valentine? 💖
+      </textPath>
+    </text>
+  </svg>
+
+  <!-- Teddy GIF -->
   <img src="image1.gif" alt="Teddy Valentine" id="valentine-gif">
 </div>
 
+<!-- Yes / No buttons -->
 <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
 <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
 <script>
-function yesClicked(){
-  document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
-}
+  // Yes button
+  function yesClicked(){
+    document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+  }
 
-function moveNo(){
-  let x = Math.random() * (window.innerWidth - 100);
-  let y = Math.random() * (window.innerHeight - 50);
+  // No button runs away
+  function moveNo(){
+    let x = Math.random() * (window.innerWidth - 100);
+    let y = Math.random() * (window.innerHeight - 50);
 
-  let btn = document.getElementById("noBtn");
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
-}
-
-// Make text curved
-const text = document.getElementById("arc-text");
-const str = text.innerText;
-text.innerText = "";
-
-const radius = 120; // adjust for curve height
-const angleStep = 6; // adjust spacing between letters
-
-for(let i=0; i<str.length; i++){
-  const span = document.createElement("span");
-  span.innerText = str[i];
-  const angle = (i - str.length/2) * angleStep;
-  const rad = angle * (Math.PI / 180);
-  const x = radius * Math.sin(rad);
-  const y = radius * (1 - Math.cos(rad));
-  span.style.transform = `translate(${x}px, -${y}px)`;
-  text.appendChild(span);
-}
+    let btn = document.getElementById("noBtn");
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+  }
 </script>
 
 </body>
