@@ -103,26 +103,33 @@ function moveNo(){
  btn.style.left=x+"px";
  btn.style.top=y+"px";
 }
-</script>
 
   <script>
-// Make each letter of the text curve
+// Curved text along an arc
 const text = document.getElementById("arc-text");
 const str = text.innerText;
 text.innerText = "";
 
-// Adjust rotation per letter
-const totalAngle = 90; // total arc in degrees
-const step = totalAngle / str.length; // rotate each letter evenly
+// radius of the arc
+const radius = 120; // increase = flatter, decrease = more curved
+const centerX = 0; // not used, purely visual
+const centerY = radius;
 
 for (let i = 0; i < str.length; i++) {
-  let span = document.createElement("span");
+  const span = document.createElement("span");
   span.innerText = str[i];
   span.style.display = "inline-block";
-  span.style.transformOrigin = "bottom center";
+  span.style.position = "relative";
+
+  // angle for each letter
+  const angle = (i - str.length/2) * 6; // adjust 6 to increase spacing
+  const rad = angle * (Math.PI / 180);
   
-  // rotate each letter around the center
-  span.style.transform = `rotate(${(i - str.length/2) * step}deg)`;
+  // x and y offset
+  const x = radius * Math.sin(rad);
+  const y = radius * (1 - Math.cos(rad));
+
+  span.style.transform = `translate(${x}px, -${y}px)`;
   text.appendChild(span);
 }
 </script>
