@@ -84,22 +84,25 @@
 
     // Create curved text dynamically
     const arcText = document.getElementById("arc-text");
-    const str = arcText.innerText;
-    arcText.innerText = "";
+const str = arcText.innerText;
+arcText.innerText = "";
 
-    const radius = 60; // adjust curve height
-    const step = 8; // adjust letter spacing
+const radius = 60; // height of the curve
+const step = 8;    // letter spacing
 
-    for (let i = 0; i < str.length; i++) {
-      const span = document.createElement("span");
-      span.innerText = str[i];
-      const angle = (i - str.length / 2) * step;
-      const rad = angle * (Math.PI / 180);
-      const x = radius * Math.sin(rad);
-      const y = radius * (1 - Math.cos(rad));
-      span.style.transform = `translate(${x}px, -${y}px)`;
-      arcText.appendChild(span);
-    }
+for (let i = 0; i < str.length; i++) {
+  const span = document.createElement("span");
+  span.innerText = str[i];
+  const angle = (i - str.length / 2) * step;
+  const rad = angle * (Math.PI / 180);
+
+  const x = radius * Math.sin(rad);
+  const y = radius * (1 - Math.cos(rad)); // downward curve
+  span.style.transform = `translate(${x}px, ${y}px)`; 
+
+  arcText.appendChild(span);
+}
+
   </script>
 
 </body>
