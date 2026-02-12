@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My King ❤️</title>
+
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #ffdde1;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 100px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 12px;
+      border: none;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: gray;
+      color: white;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine, my King? 👑💖</h1>
+
+<button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
+<button id="noBtn" onmouseover="moveNo()">No 💔</button>
+
+<script>
+function yesClicked() {
+  document.body.innerHTML =
+    "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+}
+
+function moveNo() {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+
+  let btn = document.getElementById("noBtn");
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  let texts = ["No 😅","Are you sure? 🥺","Think again 😜","Don't click me 😏"];
+  btn.innerText = texts[Math.floor(Math.random()*texts.length)];
+}
+</script>
+
+</body>
+</html>
