@@ -40,11 +40,13 @@
 <body>
 
 <script>
-let password = prompt("Enter the secret number 👑");
+let correctPassword = "0214"; // change this
+let entered = prompt("Enter the secret number 👑");
 
-if(password !== "0214") {
-  document.write("<h1 style='text-align:center;margin-top:100px;'>Wrong password 💔</h1>");
-  throw new Error("Wrong password");
+if (entered !== correctPassword) {
+  document.body.innerHTML = "";
+  alert("Wrong password 💔");
+  throw new Error("Access denied");
 }
 </script>
 
