@@ -55,11 +55,26 @@ button {
   margin-top: 50px;
 }
 
-#animation-container img {
-  margin-top: 0px;   /* remove previous margin */
+#animation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+#arc-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 1.2em;
+}
+
+#valentine-gif {
+  width: 300px;
   border-radius: 15px;
-  position: relative;
-  top: -20px;       /* move GIF up */
+  margin-top: 10px;
 }
 
 </style>
@@ -68,18 +83,8 @@ button {
 <body>
 
 <div id="animation-container">
-  <svg width="500" height="200">
-    <defs>
-      <path id="arc" d="M50,850 A200,200 0 0,1 450,150" />
-    </defs>
-    <text font-size="28" fill="white" font-weight="bold">
-      <textPath href="#arc" startOffset="50%" text-anchor="middle">
-        Will you be my Valentine? 💖
-      </textPath>
-    </text>
-  </svg>
-
-  <img src="image1.gif" alt="Teddy Valentine" width="300">
+  <div id="arc-text">Will you be my Valentine? 💖</div>
+  <img src="image1.gif" alt="Teddy Valentine" id="valentine-gif">
 </div>
 
 <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
@@ -97,6 +102,23 @@ function moveNo(){
  let btn=document.getElementById("noBtn");
  btn.style.left=x+"px";
  btn.style.top=y+"px";
+}
+</script>
+
+  <script>
+// Make each letter of the text curve
+const text = document.getElementById("arc-text");
+const str = text.innerText;
+text.innerText = "";
+const radius = 15; // higher = flatter curve
+
+for (let i = 0; i < str.length; i++) {
+  let span = document.createElement("span");
+  span.innerText = str[i];
+  span.style.display = "inline-block";
+  span.style.transformOrigin = "bottom center";
+  span.style.transform = `rotate(${(i - str.length/2) * radius}deg)`;
+  text.appendChild(span);
 }
 </script>
 
