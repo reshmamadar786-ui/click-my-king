@@ -4,55 +4,47 @@
   <title>My King ❤️</title>
   <style>
     body {
-      text-align: center;
-      font-family: Arial;
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Background image layer */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('bg.jpg') no-repeat center center;
+      font-family: Arial, sans-serif;
+      background: url('bg.jpg') no-repeat center center fixed;
       background-size: cover;
-      filter: brightness(0.85);
-      z-index: -1;
-    }
-
-    #animation-container {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin-top: 50px;
+      height: 100vh;
+      text-align: center;
     }
 
-    #animation-container svg {
-      width: 90%;
-      max-width: 500px;
-      height: 220px;
+    #arc-text {
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      height: 120px; /* space for arc */
+    }
+
+    #arc-text span {
+      display: inline-block;
+      transform-origin: bottom center;
     }
 
     #valentine-gif {
       width: 300px;
       border-radius: 15px;
-      margin-top: 20px;
     }
 
     button {
       padding: 15px 25px;
       font-size: 18px;
       margin: 10px;
-      cursor: pointer;
-      border-radius: 12px;
       border: none;
+      border-radius: 12px;
+      cursor: pointer;
     }
 
     #yesBtn {
@@ -70,43 +62,45 @@
 
 <body>
 
-<div id="animation-container">
-  <!-- SVG curved text -->
-  <svg viewBox="0 0 500 220">
-    <defs>
-      <path id="text-arc" d="M50,180 A200,200 0 0,1 450,180" />
-    </defs>
-    <text font-size="28" fill="white" font-weight="bold">
-      <textPath href="#text-arc" startOffset="50%" text-anchor="middle">
-        Will you be my Valentine? 💖
-      </textPath>
-    </text>
-  </svg>
+  <div id="arc-text">Will you be my Valentine? 💖</div>
+  <img id="valentine-gif" src="image1.gif" alt="Teddy Valentine">
 
-  <!-- Teddy GIF -->
-  <img src="image1.gif" alt="Teddy Valentine" id="valentine-gif">
-</div>
+  <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
+  <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
-<!-- Yes / No buttons -->
-<button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
-<button id="noBtn" onmouseover="moveNo()">No 💔</button>
+  <script>
+    function yesClicked(){
+      document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+    }
 
-<script>
-  // Yes button
-  function yesClicked(){
-    document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
-  }
+    function moveNo(){
+      let x = Math.random() * (window.innerWidth - 100);
+      let y = Math.random() * (window.innerHeight - 50);
 
-  // No button runs away
-  function moveNo(){
-    let x = Math.random() * (window.innerWidth - 100);
-    let y = Math.random() * (window.innerHeight - 50);
+      let btn = document.getElementById("noBtn");
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    }
 
-    let btn = document.getElementById("noBtn");
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-  }
-</script>
+    // Create curved text dynamically
+    const arcText = document.getElementById("arc-text");
+    const str = arcText.innerText;
+    arcText.innerText = "";
+
+    const radius = 60; // adjust curve height
+    const step = 8; // adjust letter spacing
+
+    for (let i = 0; i < str.length; i++) {
+      const span = document.createElement("span");
+      span.innerText = str[i];
+      const angle = (i - str.length / 2) * step;
+      const rad = angle * (Math.PI / 180);
+      const x = radius * Math.sin(rad);
+      const y = radius * (1 - Math.cos(rad));
+      span.style.transform = `translate(${x}px, -${y}px)`;
+      arcText.appendChild(span);
+    }
+  </script>
 
 </body>
 </html>
