@@ -2,51 +2,34 @@
 <html>
 <head>
 <title>My King ❤️</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:url('bg.jpg') no-repeat center center;
-  background-size:cover;
-  background-color:black;
-  min-height:100dvh;
+  background:url('bg.jpg') no-repeat center center/cover;
+  height:100vh;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
+  color:white;
   overflow:hidden;
 }
 
-/* Mobile fix */
-@media (max-width:600px){
-  body{
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-  }
-}
-
 h1{
-  color:white;
-  font-size:34px;
   text-shadow:2px 2px 5px black;
-  margin-bottom:15px;
 }
 
-/* Main image */
-#valentine-gif{
-  width:280px;
-  max-width:80%;
+#mainImg{
+  width:260px;
   border-radius:15px;
-  margin-bottom:10px;
+  margin:15px;
 }
 
-/* Buttons */
 button{
   padding:15px 25px;
   font-size:18px;
@@ -66,29 +49,12 @@ button{
   color:white;
 }
 
-.gallery{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-  margin-top:20px;
-}
-
-.gallery img{
-  width:120px;
-  height:120px;
-  object-fit:cover;
-  border-radius:12px;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
-}
-
 /* Floating hearts */
 .heart{
   position:fixed;
-  bottom:-30px;
-  font-size:24px;
+  bottom:-20px;
+  font-size:22px;
   animation:floatUp 4s linear forwards;
-  z-index:9999;
   pointer-events:none;
 }
 
@@ -98,14 +64,22 @@ button{
     opacity:0;
   }
 }
+
+.gallery img{
+  width:110px;
+  height:110px;
+  object-fit:cover;
+  border-radius:10px;
+  margin:6px;
+}
 </style>
 </head>
 
 <body>
 
-<h1 id="title">Will you be my Valentine? 💖</h1>
+<h1 id="text">Will you be my Valentine? 💖</h1>
 
-<img src="love.png" id="valentine-gif">
+<img id="mainImg" src="love.png">
 
 <div>
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
@@ -114,10 +88,9 @@ button{
 
 <script>
 
-/* NO BUTTON LOGIC */
 let noCount = 0;
 
-const messages = [
+const msgs = [
 "Are you serious?",
 "Seriously?",
 "I am Paavam 😔",
@@ -128,7 +101,7 @@ const messages = [
 "Paappuu click yes 😭"
 ];
 
-const images = [
+const imgs = [
 "sad1.gif",
 "sad2.gif",
 "sad3.jpg",
@@ -141,9 +114,44 @@ const images = [
 
 function noClicked(){
   if(noCount < 8){
-    document.getElementById("title").innerText = messages[noCount];
-    document.getElementById("valentine-gif").src = images[noCount];
+    document.getElementById("text").innerText = msgs[noCount];
+    document.getElementById("mainImg").src = imgs[noCount];
     noCount++;
   }
 
-  if(noCount =
+  if(noCount === 8){
+    document.getElementById("noBtn").style.display="none";
+  }
+}
+
+function yesClicked(){
+  document.body.innerHTML = `
+  <h1>
+  I Knew it Bujjuuu Babbyyy 😘😘😘<br>
+  I LOVE YOU SO MUCH ❤️❤️❤️
+  </h1>
+
+  <div class="gallery">
+    <img src="pic1.gif">
+    <img src="pic2.gif">
+    <img src="pic3.gif">
+    <img src="pic4.gif">
+    <img src="pic5.gif">
+  </div>
+  `;
+}
+
+/* Floating hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*window.innerWidth+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},500);
+
+</script>
+
+</body>
+</html>
