@@ -8,7 +8,7 @@
 body{
   margin:0;
   font-family:Arial;
-  background:url('bg.jpg') no-repeat center center/cover;
+  background:url('bg.jpg') no-repeat center/cover;
   height:100vh;
   display:flex;
   flex-direction:column;
@@ -45,55 +45,51 @@ button{
   bottom:-20px;
   font-size:22px;
   animation:floatUp 4s linear forwards;
-  pointer-events:none;
 }
 
 @keyframes floatUp{
   to{ transform:translateY(-120vh); opacity:0; }
 }
 
-/* BIG HEART RAIN */
+/* BIG HEART FALL */
 .fallHeart{
   position:fixed;
-  top:-30px;
-  font-size:40px;
-  animation:fallDown 5s linear forwards;
+  top:-20px;
+  font-size:38px;
+  animation:fall 5s linear forwards;
 }
 
-@keyframes fallDown{
+@keyframes fall{
   to{ transform:translateY(120vh); opacity:0; }
 }
 
 /* CONFETTI */
 .confetti{
   position:fixed;
-  width:10px;
-  height:10px;
-  border-radius:2px;
-  animation:pop 3s ease-out forwards;
+  width:12px;
+  height:12px;
+  animation:confettiPop 3s ease-out forwards;
 }
 
-@keyframes pop{
-  0%{ transform:translate(0,0) rotate(0); opacity:1; }
-  100%{ transform:translate(var(--x),var(--y)) rotate(720deg); opacity:0; }
+@keyframes confettiPop{
+  to{
+    transform:translate(var(--x),var(--y)) rotate(720deg);
+    opacity:0;
+  }
 }
 
 /* FIREWORKS */
-.firework{
+.fire{
   position:fixed;
-  width:6px;
-  height:6px;
+  width:8px;
+  height:8px;
   border-radius:50%;
-  animation:explode 1.2s ease-out forwards;
+  animation:boom 1.4s ease-out forwards;
 }
 
-@keyframes explode{
-  from{
-    transform:translate(0,0);
-    opacity:1;
-  }
+@keyframes boom{
   to{
-    transform:translate(var(--fx),var(--fy));
+    transform:translate(var(--bx),var(--by));
     opacity:0;
   }
 }
@@ -101,9 +97,9 @@ button{
 .gallery img{
   width:110px;
   height:110px;
-  object-fit:cover;
   border-radius:10px;
   margin:6px;
+  object-fit:cover;
 }
 </style>
 </head>
@@ -123,13 +119,9 @@ button{
 let noCount=0;
 
 const msgs=[
-"Are you serious?",
-"Seriously?",
-"I am Paavam 😔",
-"I am Heart Broken 💔",
-"Hey Handsome think again 😉",
-"Or don’t think at all 😜",
-"En chamathu kolanthe la please 🥺",
+"Are you serious?","Seriously?","I am Paavam 😔",
+"I am Heart Broken 💔","Hey Handsome, think again 😉",
+"Or, don’t think at all 😜","En chamathu kolanthe la please 🥺",
 "Paappuu click yes 😭"
 ];
 
@@ -139,20 +131,18 @@ const imgs=[
 ];
 
 function noClicked(){
-  const btn=document.getElementById("noBtn");
-
   if(noCount<8){
     text.innerText=msgs[noCount];
     mainImg.src=imgs[noCount];
     noCount++;
 
-    btn.style.position="fixed";
-    btn.style.left=Math.random()*(window.innerWidth-100)+"px";
-    btn.style.top=Math.random()*(window.innerHeight-50)+"px";
+    noBtn.style.position="fixed";
+    noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
+    noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
   }
 
   if(noCount===8){
-    btn.style.display="none";
+    noBtn.style.display="none";
   }
 }
 
@@ -161,7 +151,7 @@ function yesClicked(){
   document.body.innerHTML=`
   <h1>
   🎉💖 You made me the happiest 💖🎉<br>
-  😘 Bujjuuu Babbyyy 😘😘😘<br>
+  😘 Bujjuuu Babbyyy, Happy Valentine's Day😘😘😘<br>
   ❤️ I LOVE YOU SO MUCH ❤️❤️❤️
   </h1>
 
@@ -174,12 +164,12 @@ function yesClicked(){
   </div>
   `;
 
-  startBigHearts();
+  startHearts();
   startConfetti();
   startFireworks();
 }
 
-/* FLOATING HEARTS BEFORE YES */
+/* SMALL FLOAT HEARTS */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -187,10 +177,10 @@ setInterval(()=>{
   h.style.left=Math.random()*window.innerWidth+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),4000);
-},600);
+},700);
 
 /* BIG HEART RAIN */
-function startBigHearts(){
+function startHearts(){
   setInterval(()=>{
     let h=document.createElement("div");
     h.className="fallHeart";
@@ -201,15 +191,15 @@ function startBigHearts(){
   },250);
 }
 
-/* CONFETTI BURSTS */
+/* CONFETTI BURST */
 function startConfetti(){
-  const colors=["#ff4d6d","yellow","cyan","lime","orange","violet"];
+  const colors=["red","yellow","lime","cyan","pink","orange"];
 
   setInterval(()=>{
     let ox=Math.random()*window.innerWidth;
     let oy=Math.random()*window.innerHeight;
 
-    for(let i=0;i<25;i++){
+    for(let i=0;i<30;i++){
       let c=document.createElement("div");
       c.className="confetti";
       c.style.background=colors[Math.floor(Math.random()*colors.length)];
@@ -222,31 +212,31 @@ function startConfetti(){
       document.body.appendChild(c);
       setTimeout(()=>c.remove(),3000);
     }
-  },700);
+  },800);
 }
 
-/* FIREWORKS EXPLOSIONS 🎆 */
+/* 🎆 FIREWORKS */
 function startFireworks(){
-  const colors=["red","yellow","cyan","white","orange","pink"];
+  const colors=["#ff0","#f0f","#0ff","#fff","#ff4d6d"];
 
   setInterval(()=>{
     let ox=Math.random()*window.innerWidth;
     let oy=Math.random()*window.innerHeight;
 
-    for(let i=0;i<40;i++){
+    for(let i=0;i<50;i++){
       let f=document.createElement("div");
-      f.className="firework";
+      f.className="fire";
       f.style.background=colors[Math.floor(Math.random()*colors.length)];
       f.style.left=ox+"px";
       f.style.top=oy+"px";
 
-      f.style.setProperty('--fx',(Math.random()-0.5)*500+"px");
-      f.style.setProperty('--fy',(Math.random()-0.5)*500+"px");
+      f.style.setProperty('--bx',(Math.random()-0.5)*600+"px");
+      f.style.setProperty('--by',(Math.random()-0.5)*600+"px");
 
       document.body.appendChild(f);
-      setTimeout(()=>f.remove(),1200);
+      setTimeout(()=>f.remove(),1400);
     }
-  },900);
+  },1000);
 }
 </script>
 
