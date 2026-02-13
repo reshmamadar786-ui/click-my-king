@@ -50,7 +50,7 @@ button{
   position:relative;
 }
 
-/* Floating hearts */
+/* Floating hearts (before YES) */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -62,6 +62,39 @@ button{
 @keyframes floatUp{
   to{
     transform:translateY(-120vh);
+    opacity:0;
+  }
+}
+
+/* Falling hearts (after YES) */
+.fallHeart{
+  position:fixed;
+  top:-20px;
+  font-size:24px;
+  animation:fallDown 4s linear forwards;
+  pointer-events:none;
+}
+
+@keyframes fallDown{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+/* Confetti */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  top:50%;
+  left:50%;
+  animation:blast 1.5s linear forwards;
+}
+
+@keyframes blast{
+  to{
+    transform:translate(var(--x), var(--y));
     opacity:0;
   }
 }
@@ -121,7 +154,6 @@ function noClicked(){
     document.getElementById("mainImg").src = imgs[noCount];
     noCount++;
 
-    /* MOVE BUTTON RANDOMLY */
     btn.style.position="fixed";
     btn.style.left=Math.random()*(window.innerWidth-100)+"px";
     btn.style.top=Math.random()*(window.innerHeight-50)+"px";
@@ -132,11 +164,12 @@ function noClicked(){
   }
 }
 
+/* YES CLICK */
 function yesClicked(){
   document.body.innerHTML = `
   <h1>
   🎉💖 You made me the happiest 💖🎉<br>
-  😘 Bujjuuu Babbyyy, Happy Valentine's Day😘😘😘<br>
+  😘 Bujjuuu Babbyyy, Happy Valentine's Day 😘😘😘<br>
   ❤️ I LOVE YOU SO MUCH ❤️❤️❤️
   </h1>
 
@@ -148,9 +181,12 @@ function yesClicked(){
     <img src="pic5.gif">
   </div>
   `;
+
+  startFallingHearts();
+  confettiBlast();
 }
 
-/* Floating hearts */
+/* Floating hearts before YES */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -159,6 +195,37 @@ setInterval(()=>{
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),4000);
 },500);
+
+/* Falling hearts after YES */
+function startFallingHearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="fallHeart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*window.innerWidth+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
+}
+
+/* Confetti blast */
+function confettiBlast(){
+  for(let i=0;i<80;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+
+    let colors=["red","pink","yellow","blue","purple"];
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+    let x=(Math.random()-0.5)*800+"px";
+    let y=(Math.random()-0.5)*600+"px";
+    c.style.setProperty('--x',x);
+    c.style.setProperty('--y',y);
+
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),1500);
+  }
+}
 
 </script>
 
