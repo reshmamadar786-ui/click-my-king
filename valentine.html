@@ -22,7 +22,7 @@ body{
   overflow:hidden;
 }
 
-/* Mobile background fix */
+/* Mobile fix */
 @media (max-width:600px){
   body{
     background-size:contain;
@@ -31,19 +31,19 @@ body{
   }
 }
 
-/* Title */
 h1{
   color:white;
-  font-size:40px;
+  font-size:34px;
   text-shadow:2px 2px 5px black;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
-/* Image */
+/* Main image */
 #valentine-gif{
-  width:300px;
+  width:280px;
   max-width:80%;
   border-radius:15px;
+  margin-bottom:10px;
 }
 
 /* Buttons */
@@ -64,11 +64,22 @@ button{
 #noBtn{
   background:gray;
   color:white;
-  position:relative;
 }
 
-#buttons{
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
   margin-top:20px;
+}
+
+.gallery img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
 /* Floating hearts */
@@ -96,77 +107,43 @@ button{
 
 <img src="love.png" id="valentine-gif">
 
-<div id="buttons">
+<div>
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
-  <button id="noBtn" onclick="moveNo()">No 💔</button>
+  <button id="noBtn" onclick="noClicked()">No 💔</button>
 </div>
 
 <script>
+
+/* NO BUTTON LOGIC */
 let noCount = 0;
 
 const messages = [
-  "Are you serious? 😟",
-  "Seriously? 🥺",
-  "I am Paavam 😢",
-  "I am Heart Broken 💔",
-  "Hey Handsome think again 😘",
-  "Or don’t think at all 🙈",
-  "En chamathu kolanthe la please 🥹",
-  "Paappuu click YES 💖"
+"Are you serious?",
+"Seriously?",
+"I am Paavam 😔",
+"I am Heart Broken 💔",
+"Hey Handsome think again 😉",
+"Or don’t think at all 😜",
+"En chamathu kolanthe la please 🥺",
+"Paappuu click yes 😭"
 ];
 
 const images = [
-  "sad1.gif",
-  "sad2.gif",
-  "sad3.jpg",
-  "sad4.gif",
-  "sad5.gif",
-  "sad6.gif",
-  "sad7.gif",
-  "sad8.gif"
+"sad1.gif",
+"sad2.gif",
+"sad3.jpg",
+"sad4.gif",
+"sad5.gif",
+"sad6.gif",
+"sad7.gif",
+"sad8.gif"
 ];
 
-function yesClicked(){
-  document.body.innerHTML =
-  "<h1 style='color:white;margin-top:40vh'>YAY ❤️ You made me the happiest! 👑💖</h1>";
-}
-
-function moveNo(){
-  let btn = document.getElementById("noBtn");
-  let title = document.getElementById("title");
-  let img = document.getElementById("valentine-gif");
-
-  /* Change message & image */
-  if(noCount < messages.length){
-    title.innerText = messages[noCount];
-    img.src = images[noCount];
+function noClicked(){
+  if(noCount < 8){
+    document.getElementById("title").innerText = messages[noCount];
+    document.getElementById("valentine-gif").src = images[noCount];
+    noCount++;
   }
 
-  /* 8th click = hide NO */
-  if(noCount === 7){
-    btn.style.display = "none";
-    return;
-  }
-
-  /* Move button randomly */
-  btn.style.position="absolute";
-  btn.style.left=Math.random()*(window.innerWidth-120)+"px";
-  btn.style.top=Math.random()*(window.innerHeight-60)+"px";
-
-  noCount++;
-}
-
-/* Floating hearts */
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*window.innerWidth+"px";
-
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),4000);
-},500);
-</script>
-
-</body>
-</html>
+  if(noCount =
