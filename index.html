@@ -4,12 +4,17 @@
 <title>Secret Access 👑</title>
 </head>
 
-<body style="text-align:center;margin-top:100px;font-family:Arial;">
+<body style="text-align:center;margin-top:100px;font-family:Arial; background-color:#111; color:white;">
 
 <h2>Enter the secret number 👑</h2>
 
-<input type="password" id="pw" placeholder="Enter password">
-<button onclick="check()">Enter</button>
+<!-- Hint added -->
+<p style="font-size:16px; margin-bottom:20px; color:#ffcccb;">
+  Hint: Click "No" until it turns "Yes" 😉
+</p>
+
+<input type="password" id="pw" placeholder="Enter password" style="padding:10px; font-size:16px;">
+<button onclick="check()" style="padding:10px 20px; font-size:16px; margin-left:10px;">Enter</button>
 
 <script>
 function check(){
