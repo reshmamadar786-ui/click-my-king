@@ -92,5 +92,30 @@ function moveNo(){
 }
 </script>
 
+  <script>
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.innerHTML="💖";
+  heart.style.position="fixed";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.top="100%";
+  heart.style.fontSize="24px";
+  heart.style.animation="float 4s linear";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),4000);
+},500);
+
+</script>
+
+<style>
+@keyframes float{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
+</style>
+
 </body>
 </html>
