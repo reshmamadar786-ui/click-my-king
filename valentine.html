@@ -9,12 +9,9 @@
 body{
   margin:0;
   font-family:Arial;
-
-  /* Default = laptop */
   background:url('bg.jpg') no-repeat center center;
   background-size:cover;
   background-color:black;
-
   min-height:100dvh;
 
   display:flex;
@@ -25,17 +22,17 @@ body{
   overflow:hidden;
 }
 
-/* ✅ MOBILE FIX */
+/* Mobile background fix */
 @media (max-width:600px){
   body{
-    background-size:contain; /* shows full image */
+    background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
-    background-color:black; /* fills empty space */
+    background-color:black;
   }
 }
 
-/* Question */
+/* Title */
 h1{
   color:white;
   font-size:40px;
@@ -96,30 +93,66 @@ button{
 
 <body>
 
-<h1>Will you be my Valentine? 💖</h1>
+<h1 id="title">Will you be my Valentine? 💖</h1>
 
 <img src="love.png" id="valentine-gif">
 
 <div id="buttons">
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
-  <button id="noBtn" onmouseover="moveNo()">No 💔</button>
+  <button id="noBtn" onclick="moveNo()">No 💔</button>
 </div>
 
 <script>
+let noCount = 0;
+
+/* YOUR MESSAGES */
+const messages = [
+  "Are you serious? 😟",
+  "Seriously? 🥺",
+  "I am Paavam 😢",
+  "I am Heart Broken 💔",
+  "Hey Handsome think again 😘",
+  "Or don’t think at all 🙈",
+  "En chamathu kolanthe la please 🥹",
+  "Paappuu click YES 💖"
+];
+
+/* YOUR IMAGES */
+const images = [
+  "sad1.gif",
+  "sad2.gif",
+  "sad3.jpg",
+  "sad4.gif",
+  "sad5.gif",
+  "sad6.gif",
+  "sad7.gif",
+  "sad8.gif"
+];
+
 function yesClicked(){
   document.body.innerHTML =
   "<h1 style='color:white;margin-top:40vh'>YAY ❤️ You made me the happiest! 👑💖</h1>";
 }
 
 function moveNo(){
-  let btn=document.getElementById("noBtn");
+  let btn = document.getElementById("noBtn");
+  let title = document.getElementById("title");
+  let img = document.getElementById("valentine-gif");
+
+  /* Change message & image */
+  title.innerText = messages[noCount];
+  img.src = images[noCount];
+
+  /* Move button */
   btn.style.position="absolute";
+  btn.style.left=Math.random()*(window.innerWidth-120)+"px";
+  btn.style.top=Math.random()*(window.innerHeight-60)+"px";
 
-  let x=Math.random()*(window.innerWidth-120);
-  let y=Math.random()*(window.innerHeight-60);
-
-  btn.style.left=x+"px";
-  btn.style.top=y+"px";
+  /* Increase counter */
+  noCount++;
+  if(noCount >= messages.length){
+    noCount = messages.length - 1;
+  }
 }
 
 /* Floating hearts */
