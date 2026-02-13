@@ -1,94 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My King ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: url('bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
+<title>My King ❤️</title>
 
-    #animation-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:url('bg.jpg') no-repeat center/cover;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-    /* SVG is responsive */
-    svg {
-      width: 90%;
-      max-width: 600px;
-      height: 200px;
-    }
+svg{
+  width:90%;
+  max-width:600px;
+  height:160px;
+}
 
-    #valentine-gif {
-      width: 300px;
-      border-radius: 15px;
-      margin-top: 20px;
-    }
+#valentine-gif{
+  width:300px;
+  border-radius:15px;
+  margin-top:10px;
+}
 
-    button {
-      padding: 15px 25px;
-      font-size: 18px;
-      margin: 10px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-    }
+button{
+  padding:15px 25px;
+  font-size:18px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+}
 
-    #yesBtn { background-color: #ff4d6d; color: white; }
-    #noBtn { background-color: gray; color: white; position: absolute; }
-  </style>
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+}
+
+#noBtn{
+  background:gray;
+  color:white;
+  position:absolute;
+}
+</style>
 </head>
+
 <body>
 
-<div id="animation-container">
-  <!-- Sad-shaped arc using SVG -->
-  <svg viewBox="0 0 600 200">
-    <defs>
-      <!-- Concave-down arc (sad shape) -->
-      <path id="arc" d="M50,150 A250,100 0 0,0 550,150" />
-    </defs>
-    <text font-size="28" fill="white" font-weight="bold">
-      <textPath href="#arc" startOffset="50%" text-anchor="middle">
-        Will you be my Valentine? 💖
-      </textPath>
-    </text>
-  </svg>
+<!-- ✅ SAD ARC TEXT -->
+<svg viewBox="0 0 600 160">
 
-  <!-- Teddy GIF -->
-  <img src="image1.gif" id="valentine-gif" alt="Teddy Valentine">
-</div>
+  <defs>
+    <!-- THIS creates a sad ∩ arc -->
+    <path id="arc" d="M100,120 A200,120 0 0,1 500,120" />
+  </defs>
 
-<!-- Buttons -->
+  <text fill="white" font-size="28" font-weight="bold">
+    <textPath href="#arc" startOffset="50%" text-anchor="middle">
+      Will you be my Valentine? 💖
+    </textPath>
+  </text>
+
+</svg>
+
+<img src="image1.gif" id="valentine-gif">
+
 <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
 <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 
 <script>
-  // Yes button click
-  function yesClicked() {
-    document.body.innerHTML = "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
-  }
+function yesClicked(){
+  document.body.innerHTML =
+  "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+}
 
-  // No button runs away
-  function moveNo() {
-    let x = Math.random() * (window.innerWidth - 100);
-    let y = Math.random() * (window.innerHeight - 50);
-    const btn = document.getElementById("noBtn");
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-  }
+function moveNo(){
+  let x=Math.random()*(window.innerWidth-100);
+  let y=Math.random()*(window.innerHeight-50);
+
+  let btn=document.getElementById("noBtn");
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
+}
 </script>
 
 </body>
