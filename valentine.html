@@ -16,15 +16,15 @@ body{
   text-align:center;
 }
 
-/* Question text */
-#question{
-  font-size:32px;
-  font-weight:bold;
+/* Question */
+h1{
   color:white;
-  margin-bottom:15px;
+  font-size:40px;
+  text-shadow:2px 2px 5px black;
+  margin-bottom:20px;
 }
 
-/* GIF */
+/* Image */
 #valentine-gif{
   width:300px;
   border-radius:15px;
@@ -40,6 +40,7 @@ button{
   cursor:pointer;
 }
 
+/* Button colors */
 #yesBtn{
   background:#ff4d6d;
   color:white;
@@ -48,41 +49,44 @@ button{
 #noBtn{
   background:gray;
   color:white;
-  position:absolute;
-  left:60%;
-  top:85%;
+  position:relative; /* keeps it beside Yes */
 }
 
+/* Button container */
+#buttons{
+  margin-top:20px;
+}
 </style>
 </head>
 
 <body>
 
-<h1 style="
-color:white;
-font-size:40px;
-text-shadow: 2px 2px 5px black;
-margin-bottom:20px;
-">
+<h1>
 Will you be my Valentine? 💖
 </h1>
 
 <img src="love.png" id="valentine-gif">
 
-<button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
-<button id="noBtn" onmouseover="moveNo()">No 💔</button>
+<!-- Buttons wrapper -->
+<div id="buttons">
+  <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
+  <button id="noBtn" onmouseover="moveNo()">No 💔</button>
+</div>
 
 <script>
 function yesClicked(){
   document.body.innerHTML =
-  "<h1>YAY ❤️ You made me the happiest! 👑💖</h1>";
+  "<h1 style='color:white'>YAY ❤️ You made me the happiest! 👑💖</h1>";
 }
 
 function moveNo(){
+  let btn=document.getElementById("noBtn");
+
+  btn.style.position="absolute"; /* becomes free to move */
+
   let x=Math.random()*(window.innerWidth-100);
   let y=Math.random()*(window.innerHeight-50);
 
-  let btn=document.getElementById("noBtn");
   btn.style.left=x+"px";
   btn.style.top=y+"px";
 }
