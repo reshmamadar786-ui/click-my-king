@@ -3,12 +3,21 @@
 <head>
 <title>My King ❤️</title>
 
+<!-- Mobile scaling fix -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:url('bg.jpg') no-repeat center/cover;
-  height:100vh;
+
+  /* Responsive background */
+  background:url('bg.jpg') no-repeat center center;
+  background-size:cover;
+  background-attachment:scroll;
+
+  min-height:100dvh;
+
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -25,9 +34,10 @@ h1{
   margin-bottom:20px;
 }
 
-/* Image */
+/* Image responsive */
 #valentine-gif{
   width:300px;
+  max-width:80%;
   border-radius:15px;
 }
 
@@ -111,7 +121,6 @@ setInterval(()=>{
   heart.className="heart";
   heart.innerHTML="💖";
 
-  /* Use px for laptop reliability */
   heart.style.left=Math.random()*window.innerWidth+"px";
 
   document.body.appendChild(heart);
