@@ -14,6 +14,7 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
+  overflow:hidden;
 }
 
 /* Question */
@@ -49,25 +50,38 @@ button{
 #noBtn{
   background:gray;
   color:white;
-  position:relative; /* keeps it beside Yes */
+  position:relative;
 }
 
 /* Button container */
 #buttons{
   margin-top:20px;
 }
+
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:24px;
+  animation:floatUp 4s linear forwards;
+  z-index:9999;
+}
+
+@keyframes floatUp{
+  to{
+    transform:translateY(-110vh);
+    opacity:0;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<h1>
-Will you be my Valentine? 💖
-</h1>
+<h1>Will you be my Valentine? 💖</h1>
 
 <img src="love.png" id="valentine-gif">
 
-<!-- Buttons wrapper -->
 <div id="buttons">
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
   <button id="noBtn" onmouseover="moveNo()">No 💔</button>
@@ -81,8 +95,7 @@ function yesClicked(){
 
 function moveNo(){
   let btn=document.getElementById("noBtn");
-
-  btn.style.position="absolute"; /* becomes free to move */
+  btn.style.position="absolute";
 
   let x=Math.random()*(window.innerWidth-100);
   let y=Math.random()*(window.innerHeight-50);
@@ -90,32 +103,19 @@ function moveNo(){
   btn.style.left=x+"px";
   btn.style.top=y+"px";
 }
-</script>
 
-  <script>
+/* Floating hearts generator */
 setInterval(()=>{
   const heart=document.createElement("div");
+  heart.className="heart";
   heart.innerHTML="💖";
-  heart.style.position="fixed";
-  heart.style.left=Math.random()*100+"%";
-  heart.style.top="100%";
-  heart.style.fontSize="24px";
-  heart.style.animation="float 4s linear";
+  heart.style.left=Math.random()*100+"vw";
+
   document.body.appendChild(heart);
 
   setTimeout(()=>heart.remove(),4000);
 },500);
-
 </script>
-
-<style>
-@keyframes float{
-  to{
-    transform:translateY(-110vh);
-    opacity:0;
-  }
-}
-</style>
 
 </body>
 </html>
