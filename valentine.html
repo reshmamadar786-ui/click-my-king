@@ -16,18 +16,21 @@ body{
   text-align:center;
 }
 
-svg{
-  width:90%;
-  max-width:600px;
-  height:160px;
+/* Question text */
+#question{
+  font-size:32px;
+  font-weight:bold;
+  color:white;
+  margin-bottom:15px;
 }
 
+/* GIF */
 #valentine-gif{
   width:300px;
   border-radius:15px;
-  margin-top:10px;
 }
 
+/* Buttons */
 button{
   padding:15px 25px;
   font-size:18px;
@@ -52,21 +55,9 @@ button{
 
 <body>
 
-<!-- ✅ SAD ARC TEXT -->
-<svg viewBox="0 0 600 160">
-
-  <defs>
-    <!-- THIS creates a sad ∩ arc -->
-    <path id="arc" d="M100,120 A200,120 0 0,1 500,120" />
-  </defs>
-
-  <text fill="white" font-size="28" font-weight="bold">
-    <textPath href="#arc" startOffset="50%" text-anchor="middle">
-      Will you be my Valentine? 💖
-    </textPath>
-  </text>
-
-</svg>
+<div id="question">
+  Will you be my Valentine? 💖
+</div>
 
 <img src="image1.gif" id="valentine-gif">
 
