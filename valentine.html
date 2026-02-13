@@ -63,6 +63,21 @@ button{
   to{ transform:translateY(120vh); opacity:0; }
 }
 
+/* 🌹 BIG ROSES */
+.rose{
+  position:fixed;
+  bottom:-40px;
+  font-size:45px;
+  animation:roseFloat 7s linear forwards;
+}
+
+@keyframes roseFloat{
+  to{
+    transform:translateY(-130vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
 /* CONFETTI */
 .confetti{
   position:fixed;
@@ -151,7 +166,7 @@ function yesClicked(){
   document.body.innerHTML=`
   <h1>
   🎉💖 You made me the happiest 💖🎉<br>
-  😘 Bujjuuu Babbyyy, Happy Valentine's Day😘😘😘<br>
+  😘 Bujjuuu Babbyyy, Happy Valentine's Day 😘😘😘<br>
   ❤️ I LOVE YOU SO MUCH ❤️❤️❤️
   </h1>
 
@@ -167,6 +182,7 @@ function yesClicked(){
   startHearts();
   startConfetti();
   startFireworks();
+  startRoses(); /* 🌹 START ROSES */
 }
 
 /* SMALL FLOAT HEARTS */
@@ -191,7 +207,19 @@ function startHearts(){
   },250);
 }
 
-/* CONFETTI BURST */
+/* 🌹 ROSES */
+function startRoses(){
+  setInterval(()=>{
+    let r=document.createElement("div");
+    r.className="rose";
+    r.innerHTML="🌹";
+    r.style.left=Math.random()*window.innerWidth+"px";
+    document.body.appendChild(r);
+    setTimeout(()=>r.remove(),7000);
+  },800);
+}
+
+/* CONFETTI */
 function startConfetti(){
   const colors=["red","yellow","lime","cyan","pink","orange"];
 
@@ -215,7 +243,7 @@ function startConfetti(){
   },800);
 }
 
-/* 🎆 FIREWORKS */
+/* FIREWORKS */
 function startFireworks(){
   const colors=["#ff0","#f0f","#0ff","#fff","#ff4d6d"];
 
