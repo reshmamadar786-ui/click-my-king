@@ -22,13 +22,12 @@ body{
   overflow:hidden;
 }
 
-/* Mobile background fix */
+/* Mobile fix */
 @media (max-width:600px){
   body{
     background-size:contain;
     background-repeat:no-repeat;
     background-position:center;
-    background-color:black;
   }
 }
 
@@ -105,7 +104,6 @@ button{
 <script>
 let noCount = 0;
 
-/* YOUR MESSAGES */
 const messages = [
   "Are you serious? 😟",
   "Seriously? 🥺",
@@ -117,7 +115,6 @@ const messages = [
   "Paappuu click YES 💖"
 ];
 
-/* YOUR IMAGES */
 const images = [
   "sad1.gif",
   "sad2.gif",
@@ -136,23 +133,38 @@ function yesClicked(){
 
 function moveNo(){
   let btn = document.getElementById("noBtn");
+  let yesBtn = document.getElementById("yesBtn");
   let title = document.getElementById("title");
   let img = document.getElementById("valentine-gif");
 
   /* Change message & image */
-  title.innerText = messages[noCount];
-  img.src = images[noCount];
+  if(noCount < messages.length){
+    title.innerText = messages[noCount];
+    img.src = images[noCount];
+  }
 
-  /* Move button */
+  /* 8th click special trick */
+  if(noCount === 7){
+    let rect = yesBtn.getBoundingClientRect();
+
+    btn.style.position="absolute";
+    btn.style.left = rect.left + "px";
+    btn.style.top = rect.top + "px";
+
+    /* vanish after 0.6s */
+    setTimeout(()=>{
+      btn.style.display="none";
+    },600);
+
+    return;
+  }
+
+  /* Normal escape move */
   btn.style.position="absolute";
   btn.style.left=Math.random()*(window.innerWidth-120)+"px";
   btn.style.top=Math.random()*(window.innerHeight-60)+"px";
 
-  /* Increase counter */
   noCount++;
-  if(noCount >= messages.length){
-    noCount = messages.length - 1;
-  }
 }
 
 /* Floating hearts */
