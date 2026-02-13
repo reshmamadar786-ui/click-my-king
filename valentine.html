@@ -39,18 +39,10 @@ button{
   cursor:pointer;
 }
 
-#yesBtn{
-  background:#ff4d6d;
-  color:white;
-}
+#yesBtn{ background:#ff4d6d; color:white; }
+#noBtn{ background:gray; color:white; position:relative; }
 
-#noBtn{
-  background:gray;
-  color:white;
-  position:relative;
-}
-
-/* Floating hearts (before YES) */
+/* FLOATING HEARTS (before yes) */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -60,41 +52,34 @@ button{
 }
 
 @keyframes floatUp{
-  to{
-    transform:translateY(-120vh);
-    opacity:0;
-  }
+  to{ transform:translateY(-120vh); opacity:0; }
 }
 
-/* Falling hearts (after YES) */
+/* BIG FALLING HEARTS (after yes) */
 .fallHeart{
   position:fixed;
-  top:-20px;
-  font-size:24px;
-  animation:fallDown 4s linear forwards;
+  top:-30px;
+  font-size:38px;
+  animation:fallDown 5s linear forwards;
   pointer-events:none;
 }
 
 @keyframes fallDown{
-  to{
-    transform:translateY(110vh);
-    opacity:0;
-  }
+  to{ transform:translateY(120vh); opacity:0; }
 }
 
-/* Confetti */
+/* CONFETTI */
 .confetti{
   position:fixed;
-  width:10px;
-  height:10px;
-  top:50%;
-  left:50%;
-  animation:blast 1.5s linear forwards;
+  width:12px;
+  height:12px;
+  border-radius:3px;
+  animation:confettiFall 4s linear forwards;
 }
 
-@keyframes blast{
+@keyframes confettiFall{
   to{
-    transform:translate(var(--x), var(--y));
+    transform:translateY(110vh) rotate(720deg);
     opacity:0;
   }
 }
@@ -122,9 +107,9 @@ button{
 
 <script>
 
-let noCount = 0;
+let noCount=0;
 
-const msgs = [
+const msgs=[
 "Are you serious?",
 "Seriously?",
 "I am Paavam 😔",
@@ -135,23 +120,17 @@ const msgs = [
 "Paappuu click yes 😭"
 ];
 
-const imgs = [
-"sad1.gif",
-"sad2.gif",
-"sad3.jpg",
-"sad4.gif",
-"sad5.gif",
-"sad6.gif",
-"sad7.gif",
-"sad8.gif"
+const imgs=[
+"sad1.gif","sad2.gif","sad3.jpg","sad4.gif",
+"sad5.gif","sad6.gif","sad7.gif","sad8.gif"
 ];
 
 function noClicked(){
-  const btn = document.getElementById("noBtn");
+  const btn=document.getElementById("noBtn");
 
-  if(noCount < 8){
-    document.getElementById("text").innerText = msgs[noCount];
-    document.getElementById("mainImg").src = imgs[noCount];
+  if(noCount<8){
+    text.innerText=msgs[noCount];
+    mainImg.src=imgs[noCount];
     noCount++;
 
     btn.style.position="fixed";
@@ -159,17 +138,17 @@ function noClicked(){
     btn.style.top=Math.random()*(window.innerHeight-50)+"px";
   }
 
-  if(noCount === 8){
+  if(noCount===8){
     btn.style.display="none";
   }
 }
 
 /* YES CLICK */
 function yesClicked(){
-  document.body.innerHTML = `
+  document.body.innerHTML=`
   <h1>
   🎉💖 You made me the happiest 💖🎉<br>
-  😘 Bujjuuu Babbyyy, Happy Valentine's Day 😘😘😘<br>
+  😘 Bujjuuu Babbyyy 😘😘😘<br>
   ❤️ I LOVE YOU SO MUCH ❤️❤️❤️
   </h1>
 
@@ -182,11 +161,11 @@ function yesClicked(){
   </div>
   `;
 
-  startFallingHearts();
-  confettiBlast();
+  startBigHearts();
+  startConfettiRain();
 }
 
-/* Floating hearts before YES */
+/* FLOATING HEARTS before yes */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -194,37 +173,39 @@ setInterval(()=>{
   h.style.left=Math.random()*window.innerWidth+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),4000);
-},500);
+},600);
 
-/* Falling hearts after YES */
-function startFallingHearts(){
+/* BIG HEARTS after yes */
+function startBigHearts(){
   setInterval(()=>{
     let h=document.createElement("div");
     h.className="fallHeart";
     h.innerHTML="💖";
     h.style.left=Math.random()*window.innerWidth+"px";
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4000);
-  },300);
+    setTimeout(()=>h.remove(),5000);
+  },250);
 }
 
-/* Confetti blast */
-function confettiBlast(){
-  for(let i=0;i<80;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
+/* CONTINUOUS CONFETTI */
+function startConfettiRain(){
+  const colors=["#ff4d6d","yellow","cyan","lime","orange","violet"];
 
-    let colors=["red","pink","yellow","blue","purple"];
-    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+  setInterval(()=>{
+    for(let i=0;i<12;i++){
+      let c=document.createElement("div");
+      c.className="confetti";
 
-    let x=(Math.random()-0.5)*800+"px";
-    let y=(Math.random()-0.5)*600+"px";
-    c.style.setProperty('--x',x);
-    c.style.setProperty('--y',y);
+      c.style.background=
+        colors[Math.floor(Math.random()*colors.length)];
 
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),1500);
-  }
+      c.style.left=Math.random()*window.innerWidth+"px";
+      c.style.top="-20px";
+
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),4000);
+    }
+  },300);
 }
 
 </script>
