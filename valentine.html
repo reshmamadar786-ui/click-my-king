@@ -61,15 +61,16 @@ button{
 /* Floating hearts */
 .heart{
   position:fixed;
-  bottom:-20px;
+  bottom:-30px;
   font-size:24px;
   animation:floatUp 4s linear forwards;
   z-index:9999;
+  pointer-events:none;
 }
 
 @keyframes floatUp{
   to{
-    transform:translateY(-110vh);
+    transform:translateY(-120vh);
     opacity:0;
   }
 }
@@ -90,15 +91,15 @@ button{
 <script>
 function yesClicked(){
   document.body.innerHTML =
-  "<h1 style='color:white'>YAY ❤️ You made me the happiest! 👑💖</h1>";
+  "<h1 style='color:white;margin-top:40vh'>YAY ❤️ You made me the happiest! 👑💖</h1>";
 }
 
 function moveNo(){
   let btn=document.getElementById("noBtn");
   btn.style.position="absolute";
 
-  let x=Math.random()*(window.innerWidth-100);
-  let y=Math.random()*(window.innerHeight-50);
+  let x=Math.random()*(window.innerWidth-120);
+  let y=Math.random()*(window.innerHeight-60);
 
   btn.style.left=x+"px";
   btn.style.top=y+"px";
@@ -109,7 +110,9 @@ setInterval(()=>{
   const heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
+
+  /* Use px for laptop reliability */
+  heart.style.left=Math.random()*window.innerWidth+"px";
 
   document.body.appendChild(heart);
 
