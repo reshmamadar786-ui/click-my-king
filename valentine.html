@@ -3,7 +3,6 @@
 <head>
 <title>My King ❤️</title>
 
-<!-- Mobile scaling fix -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,10 +10,10 @@ body{
   margin:0;
   font-family:Arial;
 
-  /* Responsive background */
+  /* Default = laptop */
   background:url('bg.jpg') no-repeat center center;
   background-size:cover;
-  background-attachment:scroll;
+  background-color:black;
 
   min-height:100dvh;
 
@@ -26,6 +25,16 @@ body{
   overflow:hidden;
 }
 
+/* ✅ MOBILE FIX */
+@media (max-width:600px){
+  body{
+    background-size:contain; /* shows full image */
+    background-repeat:no-repeat;
+    background-position:center;
+    background-color:black; /* fills empty space */
+  }
+}
+
 /* Question */
 h1{
   color:white;
@@ -34,7 +43,7 @@ h1{
   margin-bottom:20px;
 }
 
-/* Image responsive */
+/* Image */
 #valentine-gif{
   width:300px;
   max-width:80%;
@@ -51,7 +60,6 @@ button{
   cursor:pointer;
 }
 
-/* Button colors */
 #yesBtn{
   background:#ff4d6d;
   color:white;
@@ -63,7 +71,6 @@ button{
   position:relative;
 }
 
-/* Button container */
 #buttons{
   margin-top:20px;
 }
@@ -115,16 +122,14 @@ function moveNo(){
   btn.style.top=y+"px";
 }
 
-/* Floating hearts generator */
+/* Floating hearts */
 setInterval(()=>{
   const heart=document.createElement("div");
   heart.className="heart";
   heart.innerHTML="💖";
-
   heart.style.left=Math.random()*window.innerWidth+"px";
 
   document.body.appendChild(heart);
-
   setTimeout(()=>heart.remove(),4000);
 },500);
 </script>
