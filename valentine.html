@@ -2,34 +2,40 @@
 <html>
 <head>
 <title>My King ❤️</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:url('bg.jpg') no-repeat center center/cover;
-  height:100vh;
+  background:url('bg.jpg') no-repeat center/cover;
+  min-height:100vh;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
-  color:white;
   overflow:hidden;
 }
 
+/* Question */
 h1{
+  color:white;
+  font-size:40px;
   text-shadow:2px 2px 5px black;
+  margin-bottom:20px;
 }
 
-#mainImg{
-  width:260px;
+/* Main image */
+#valentine-gif{
+  width:300px;
+  max-width:80%;
   border-radius:15px;
-  margin:15px;
 }
 
+/* Buttons */
 button{
   padding:15px 25px;
   font-size:18px;
@@ -53,8 +59,8 @@ button{
 /* Floating hearts */
 .heart{
   position:fixed;
-  bottom:-20px;
-  font-size:22px;
+  bottom:-30px;
+  font-size:24px;
   animation:floatUp 4s linear forwards;
   pointer-events:none;
 }
@@ -66,77 +72,38 @@ button{
   }
 }
 
+/* Gallery after YES */
+.gallery{
+  margin-top:20px;
+}
+
 .gallery img{
-  width:110px;
-  height:110px;
-  object-fit:cover;
-  border-radius:10px;
-  margin:6px;
+  width:120px;
+  margin:10px;
+  border-radius:12px;
 }
 </style>
 </head>
 
 <body>
 
-<h1 id="text">Will you be my Valentine? 💖</h1>
+<h1>Will you be my Valentine? 💖</h1>
 
-<img id="mainImg" src="love.png">
+<img src="love.png" id="valentine-gif">
 
 <div>
   <button id="yesBtn" onclick="yesClicked()">Yes 💘</button>
-  <button id="noBtn" onclick="noClicked()">No 💔</button>
+  <button id="noBtn" onmouseover="moveNo()">No 💔</button>
 </div>
 
 <script>
-
-let noCount = 0;
-
-const msgs = [
-"Are you serious?",
-"Seriously?",
-"I am Paavam 😔",
-"I am Heart Broken 💔",
-"Hey Handsome think again 😉",
-"Or don’t think at all 😜",
-"En chamathu kolanthe la please 🥺",
-"Paappuu click yes 😭"
-];
-
-const imgs = [
-"sad1.gif",
-"sad2.gif",
-"sad3.jpg",
-"sad4.gif",
-"sad5.gif",
-"sad6.gif",
-"sad7.gif",
-"sad8.gif"
-];
-
-function noClicked(){
-  const btn = document.getElementById("noBtn");
-
-  if(noCount < 8){
-    document.getElementById("text").innerText = msgs[noCount];
-    document.getElementById("mainImg").src = imgs[noCount];
-    noCount++;
-
-    /* MOVE BUTTON RANDOMLY */
-    btn.style.position="fixed";
-    btn.style.left=Math.random()*(window.innerWidth-100)+"px";
-    btn.style.top=Math.random()*(window.innerHeight-50)+"px";
-  }
-
-  if(noCount === 8){
-    btn.style.display="none";
-  }
-}
-
+/* YES CLICK */
 function yesClicked(){
   document.body.innerHTML = `
   <h1>
-  Happy Valentine's Day Bujjuuu Babbyyy 😘😘😘<br>
-  I LOVE YOU SO MUCH ❤️❤️❤️
+  🎉💖 You made me the happiest 💖🎉<br>
+  😘 Bujjuuu Babbyyy 😘😘😘<br>
+  ❤️ I LOVE YOU SO MUCH ❤️❤️❤️
   </h1>
 
   <div class="gallery">
@@ -149,16 +116,28 @@ function yesClicked(){
   `;
 }
 
-/* Floating hearts */
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*window.innerWidth+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),4000);
-},500);
+/* NO BUTTON RUNS AWAY */
+function moveNo(){
+  let btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
 
+  let x=Math.random()*(window.innerWidth-120);
+  let y=Math.random()*(window.innerHeight-60);
+
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
+}
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*window.innerWidth+"px";
+
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),4000);
+},500);
 </script>
 
 </body>
