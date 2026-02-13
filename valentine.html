@@ -22,7 +22,7 @@ body{
   overflow:hidden;
 }
 
-/* Mobile fix */
+/* Mobile background fix */
 @media (max-width:600px){
   body{
     background-size:contain;
@@ -133,7 +133,6 @@ function yesClicked(){
 
 function moveNo(){
   let btn = document.getElementById("noBtn");
-  let yesBtn = document.getElementById("yesBtn");
   let title = document.getElementById("title");
   let img = document.getElementById("valentine-gif");
 
@@ -143,23 +142,13 @@ function moveNo(){
     img.src = images[noCount];
   }
 
-  /* 8th click special trick */
+  /* 8th click = hide NO */
   if(noCount === 7){
-    let rect = yesBtn.getBoundingClientRect();
-
-    btn.style.position="absolute";
-    btn.style.left = rect.left + "px";
-    btn.style.top = rect.top + "px";
-
-    /* vanish after 0.6s */
-    setTimeout(()=>{
-      btn.style.display="none";
-    },600);
-
+    btn.style.display = "none";
     return;
   }
 
-  /* Normal escape move */
+  /* Move button randomly */
   btn.style.position="absolute";
   btn.style.left=Math.random()*(window.innerWidth-120)+"px";
   btn.style.top=Math.random()*(window.innerHeight-60)+"px";
